@@ -12,7 +12,7 @@ class SettingFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("ShukkinFragment", "Fragmentの初回起動")
+        Log.d("AddWorkLogFragment", "Fragmentの初回起動")
     }
 
     override fun onCreateView(
@@ -20,9 +20,10 @@ class SettingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        Log.d("ShukkinFragment", "SettingFragmentをCreateViewしました")
+        Log.d("AddWorkLogFragment", "SettingFragmentをCreateViewしました")
+        val view = inflater.inflate(R.layout.fragment_setting, container, false)
 
-        return inflater.inflate(R.layout.fragment_setting, container, false)
+        return view
     }
 
 }

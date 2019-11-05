@@ -1,35 +1,45 @@
 package com.valjapan.kintai
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentTransaction
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class MainActivity : AppCompatActivity() {
-    private val shukkinFragment: ShukkinFragment = ShukkinFragment()
-    private val kakuninFragment: KakuninFragment = KakuninFragment()
+    private val addWorkLogFragment: AddWorkLogFragment = AddWorkLogFragment()
+    private val checkWorkFragment: CheckWorkFragment = CheckWorkFragment()
     private val settingFragment: SettingFragment = SettingFragment()
+    private lateinit var realm: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        realm = Realm.getDefaultInstance()
+
+        checkPermission()
+
         if (savedInstanceState == null) {
             val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-            transaction.add(R.id.fragment_container, shukkinFragment).commit()
+            transaction.add(R.id.fragment_container, addWorkLogFragment).commit()
         }
 
         bottom_navigation.setOnNavigationItemSelectedListener {
             val transaction = supportFragmentManager.beginTransaction()
             when (it.itemId) {
-                R.id.shukkin -> {
-                    transaction.replace(R.id.fragment_container, shukkinFragment)
+                R.id.addWorkLog -> {
+                    transaction.replace(R.id.fragment_container, addWorkLogFragment)
                         .addToBackStack(null).commit()
                     return@setOnNavigationItemSelectedListener true
                 }
 
-                R.id.kakunin -> {
-                    transaction.replace(R.id.fragment_container, kakuninFragment)
+                R.id.checkWork -> {
+                    transaction.replace(R.id.fragment_container, checkWorkFragment)
                         .addToBackStack(null).commit()
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -46,4 +56,29 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun checkPermission() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // パーミッションの許可を取得する
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ), 1000
+            )
+        }
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        realm.close()
+    }
 }
