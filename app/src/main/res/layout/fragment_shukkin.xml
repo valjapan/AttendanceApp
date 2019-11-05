@@ -3,12 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShukkinFragment">
+    android:background="@color/background"
+    tools:context=".AddWorkLogFragment">
+
+
+    <ImageView
+        android:id="@+id/addWorkDataImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:foreground="@drawable/ripple_effect"
+        android:src="@drawable/shape_round" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/kakunin"
         android:layout_gravity="center"
         android:text="SHUKKIN" />
+
 
 </FrameLayout>
