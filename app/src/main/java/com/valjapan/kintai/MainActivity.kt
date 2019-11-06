@@ -34,18 +34,18 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.addWorkLog -> {
                     transaction.replace(R.id.fragment_container, addWorkLogFragment)
-                        .addToBackStack(null).commit()
+                        .disallowAddToBackStack().commit()
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.checkWork -> {
                     transaction.replace(R.id.fragment_container, checkWorkFragment)
-                        .addToBackStack(null).commit()
+                       .disallowAddToBackStack().commit()
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.setting -> {
                     transaction.replace(R.id.fragment_container, settingFragment)
-                        .addToBackStack(null).commit()
+                        .disallowAddToBackStack().commit()
                     return@setOnNavigationItemSelectedListener true
                 }
             }
