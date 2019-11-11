@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/addWorkLog"
-        android:icon="@android:drawable/ic_btn_speak_now"
+        android:icon="@drawable/ic_work_white_64dp"
         android:title="出勤/退勤" />
 
     <item
         android:id="@+id/checkWork"
-        android:icon="@android:drawable/ic_delete"
+        android:icon="@drawable/ic_view_list_white_64dp"
         android:title="確認" />
 
     <item
         android:id="@+id/setting"
-        android:icon="@android:drawable/ic_dialog_alert"
+        android:icon="@drawable/ic_settings_white_64dp"
         android:title="設定" />
 
 </menu>
