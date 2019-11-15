@@ -1,4 +1,4 @@
-package com.valjapan.kintai
+package com.valjapan.kintai.adapter
 
 import io.realm.RealmObject
 import java.util.*

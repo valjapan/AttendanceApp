@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context=".CheckWorkFragment">
+    tools:context=".fragment.CheckWorkFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,9 +43,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/check_recycler_view"
         android:layout_width="match_parent"
-        android:layout_marginTop="4dp"
         android:layout_height="match_parent"
         android:layout_marginBottom="56dp"
+        android:layoutAnimation="@anim/layout_animation_fall_down"
+        android:paddingTop="4dp"
         android:scrollbars="vertical" />
 
 </LinearLayout>

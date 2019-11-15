@@ -1,4 +1,4 @@
-package com.valjapan.kintai
+package com.valjapan.kintai.fragment
 
 import android.content.Context.WIFI_SERVICE
 import android.net.wifi.WifiManager
@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.valjapan.kintai.R
+import com.valjapan.kintai.adapter.WorkData
 import io.realm.Realm
 import kotlinx.android.synthetic.main.fragment_shukkin.view.*
 import java.util.*

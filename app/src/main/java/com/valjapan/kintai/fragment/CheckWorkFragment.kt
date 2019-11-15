@@ -1,4 +1,4 @@
-package com.valjapan.kintai
+package com.valjapan.kintai.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.valjapan.kintai.R
+import com.valjapan.kintai.adapter.RealmViewAdapter
+import com.valjapan.kintai.adapter.WorkData
 import io.realm.Realm
 
 class CheckWorkFragment : Fragment() {
@@ -30,7 +33,8 @@ class CheckWorkFragment : Fragment() {
         recyclerView = view.findViewById(R.id.check_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         Log.d("Debug", realmResults.toString())
-        recyclerView.adapter = RealmViewAdapter(view.context, realmResults, false)
+        recyclerView.adapter =
+            RealmViewAdapter(view.context, realmResults, false)
 
 
         // Inflate the layout for this fragment
