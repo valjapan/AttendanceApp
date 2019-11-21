@@ -13,6 +13,8 @@ import com.valjapan.kintai.adapter.RealmViewAdapter
 import com.valjapan.kintai.adapter.WorkData
 import io.realm.Realm
 
+
+
 class CheckWorkFragment : Fragment() {
     private var realm: Realm? = null
     private lateinit var recyclerView: RecyclerView
@@ -35,6 +37,8 @@ class CheckWorkFragment : Fragment() {
         Log.d("Debug", realmResults.toString())
         recyclerView.adapter =
             RealmViewAdapter(view.context, realmResults, false)
+
+
 
 
         // Inflate the layout for this fragment

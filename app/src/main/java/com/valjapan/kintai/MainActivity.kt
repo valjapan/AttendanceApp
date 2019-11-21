@@ -14,12 +14,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
-    private val addWorkLogFragment: AddWorkLogFragment =
-        AddWorkLogFragment()
-    private val checkWorkFragment: CheckWorkFragment =
-        CheckWorkFragment()
-    private val settingFragment: SettingFragment =
-        SettingFragment()
+    private val addWorkLogFragment: AddWorkLogFragment = AddWorkLogFragment()
+    private val checkWorkFragment: CheckWorkFragment = CheckWorkFragment()
+    private val settingFragment: SettingFragment = SettingFragment()
     private lateinit var realm: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +40,6 @@ class MainActivity : AppCompatActivity() {
                         .disallowAddToBackStack().commit()
                     return@setOnNavigationItemSelectedListener true
                 }
-
                 R.id.checkWork -> {
                     transaction.replace(R.id.fragment_container, checkWorkFragment)
                         .disallowAddToBackStack().commit()
@@ -55,11 +51,8 @@ class MainActivity : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
             }
-
             return@setOnNavigationItemSelectedListener false
-
         }
-
     }
 
     private fun checkPermission() {
@@ -81,7 +74,6 @@ class MainActivity : AppCompatActivity() {
             )
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

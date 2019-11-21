@@ -6,6 +6,7 @@
     android:layout_height="80dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
+    android:id="@+id/cardView"
     android:background="@color/white"
     app:cardUseCompatPadding="true">
 
@@ -21,7 +22,8 @@
             android:layout_marginStart="32dp"
             android:gravity="center"
             android:text="31"
-            android:textSize="48sp" />
+            android:textSize="48sp"
+            android:transitionName="dateTime" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -41,8 +43,10 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center|end"
+                    android:scaleType="centerCrop"
                     android:text="20:00"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:transitionName="startTime" />
 
                 <ImageView
                     android:layout_width="40dp"
@@ -57,7 +61,8 @@
                     android:layout_weight="1"
                     android:gravity="center|start"
                     android:text="22:00"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:transitionName="finishTime" />
 
             </LinearLayout>
 
@@ -68,7 +73,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Life is Tech! TMD9F"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:transitionName="ssid" />
 
         </LinearLayout>
     </LinearLayout>
