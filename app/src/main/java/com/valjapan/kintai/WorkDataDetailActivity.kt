@@ -20,15 +20,12 @@ class WorkDataDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_work_data_detail)
         realm = Realm.getDefaultInstance()
 
-        Log.d("Log", intent.getStringExtra("startDate"))
-
-        val sdFormat = SimpleDateFormat("EEE MM dd HH:mm:ss z yyyy", Locale.JAPANESE)
-        dateFormat = sdFormat.parse("Wed Nov 06 23:47:48 GMT+09:00 2019")
-        Log.d("Log", dateFormat.toString())
+        val dataId = intent.getStringExtra("id") ?: ""
+        Log.d("dataId", dataId)
 
 
         val data = realm?.where(WorkData::class.java)
-            ?.equalTo("startTime", dateFormat)
+            ?.equalTo("id", dataId)
             ?.findFirst()
 
         val startTime = data?.startTime

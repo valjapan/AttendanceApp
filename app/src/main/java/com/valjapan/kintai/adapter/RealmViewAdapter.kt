@@ -60,7 +60,7 @@ class RealmViewAdapter(
 
             val context: Context = context
             val intent = Intent(context, WorkDataDetailActivity::class.java)
-            intent.putExtra("startDate", works?.startTime.toString())
+            intent.putExtra("id", works?.id)
 
             Log.d("Log", works?.startTime.toString())
             context.startActivity(intent)
