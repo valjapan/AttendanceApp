@@ -1,9 +1,11 @@
 package com.valjapan.kintai.adapter
 
 import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
 import java.util.*
 
 open class WorkData : RealmObject() {
+    @PrimaryKey open var id: String? = null
     var startTime: Date? = null
     var finishTime: Date? = null
     var ssid: String? = null

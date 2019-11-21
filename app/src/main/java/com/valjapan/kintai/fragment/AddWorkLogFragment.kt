@@ -87,7 +87,7 @@ class AddWorkLogFragment : Fragment() {
 
     private fun addRealm(ssid: String) {
         realm!!.executeTransaction {
-            workData = it.createObject(WorkData::class.java)
+            workData = it.createObject(WorkData::class.java, UUID.randomUUID().toString()) // PrimaryKeyとなるプロパティの値を入れる
             workData.startTime = nowDate()
             workData.finishTime = null
             workData.ssid = ssid
