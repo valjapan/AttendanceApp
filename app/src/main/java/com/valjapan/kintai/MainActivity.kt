@@ -6,6 +6,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentTransaction
+import com.valjapan.kintai.fragment.AddWorkLogFragment
+import com.valjapan.kintai.fragment.CheckWorkFragment
+import com.valjapan.kintai.fragment.SettingFragment
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -37,10 +40,9 @@ class MainActivity : AppCompatActivity() {
                         .disallowAddToBackStack().commit()
                     return@setOnNavigationItemSelectedListener true
                 }
-
                 R.id.checkWork -> {
                     transaction.replace(R.id.fragment_container, checkWorkFragment)
-                       .disallowAddToBackStack().commit()
+                        .disallowAddToBackStack().commit()
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.setting -> {
@@ -49,11 +51,8 @@ class MainActivity : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
             }
-
             return@setOnNavigationItemSelectedListener false
-
         }
-
     }
 
     private fun checkPermission() {
@@ -75,7 +74,6 @@ class MainActivity : AppCompatActivity() {
             )
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

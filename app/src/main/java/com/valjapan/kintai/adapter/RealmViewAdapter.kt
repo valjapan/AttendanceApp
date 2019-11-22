@@ -1,12 +1,17 @@
-package com.valjapan.kintai
+package com.valjapan.kintai.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.valjapan.kintai.R
+import com.valjapan.kintai.WorkDataDetailActivity
 import io.realm.OrderedRealmCollection
 import io.realm.RealmRecyclerViewAdapter
 import java.text.SimpleDateFormat
@@ -21,6 +26,7 @@ class RealmViewAdapter(
     RealmRecyclerViewAdapter<WorkData, RealmViewAdapter.ViewHolder>(objects, autoUpdate) {
 
     var listener: AdapterView.OnItemClickListener? = null
+    private var workDataActivity: WorkDataDetailActivity = WorkDataDetailActivity()
 
     override fun getItemCount(): Int = objects?.size ?: 0
 
@@ -29,8 +35,6 @@ class RealmViewAdapter(
         val startTime = works?.startTime
         val finishTime = works?.finishTime
 
-        //Dateクラスをインスタンス
-//            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.JAPANESE)
         val date = SimpleDateFormat("dd", Locale.JAPANESE)
         val hour = SimpleDateFormat("HH:mm", Locale.JAPANESE)
 
@@ -43,6 +47,16 @@ class RealmViewAdapter(
         }
         holder.ssidText.text = works?.ssid
 
+        holder.cardView.setOnClickListener {
+
+            val context: Context = context
+            val intent = Intent(context, WorkDataDetailActivity::class.java)
+            intent.putExtra("id", works?.id)
+
+            Log.d("Log", works?.startTime.toString())
+            context.startActivity(intent)
+
+        }
     }
 
     // Create new views (invoked by the layout manager)
@@ -59,13 +73,11 @@ class RealmViewAdapter(
         var finishTimeText: TextView = view.findViewById(R.id.finishTimeText)
         var workDateText: TextView = view.findViewById(R.id.dayText)
         var ssidText: TextView = view.findViewById(R.id.ssidText)
+        var cardView: CardView = view.findViewById(R.id.cardView)
     }
 
     interface OnItemClickListener {
-        fun onItemClick(key: String, item: WorkData)
-
-        fun onItemDeleteClick(key: String, item: WorkData)
+        fun onClickItem(key: String, item: WorkData)
     }
-
 }
 
