@@ -35,8 +35,6 @@ class RealmViewAdapter(
         val startTime = works?.startTime
         val finishTime = works?.finishTime
 
-        //Dateクラスをインスタンス
-//            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.JAPANESE)
         val date = SimpleDateFormat("dd", Locale.JAPANESE)
         val hour = SimpleDateFormat("HH:mm", Locale.JAPANESE)
 
@@ -51,20 +49,12 @@ class RealmViewAdapter(
 
         holder.cardView.setOnClickListener {
 
-            //            val manager = (context as MainActivity).supportFragmentManager
-//            val set = TransitionSet()
-//            set.addTransition(ChangeBounds())
-//            set.addTransition(ChangeImageTransform())
-//            set.ordering = TransitionSet.ORDERING_SEQUENTIAL
-
-
             val context: Context = context
             val intent = Intent(context, WorkDataDetailActivity::class.java)
-            intent.putExtra("startDate", works?.startTime.toString())
+            intent.putExtra("id", works?.id)
 
             Log.d("Log", works?.startTime.toString())
             context.startActivity(intent)
-
 
         }
     }

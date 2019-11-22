@@ -13,17 +13,17 @@ import com.valjapan.kintai.R
 import com.valjapan.kintai.adapter.WorkData
 import io.realm.Realm
 import kotlinx.android.synthetic.main.fragment_shukkin.view.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 
 class AddWorkLogFragment : Fragment() {
     private var realm: Realm? = null
-    lateinit var workData: WorkData
+    private lateinit var workData: WorkData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("AddWorkLogFragment", "Fragmentの初回起動")
-
     }
 
     override fun onCreateView(
@@ -71,7 +71,6 @@ class AddWorkLogFragment : Fragment() {
             ipAdr shr 16 and 0xff,
             ipAdr shr 24 and 0xff
         )
-
         val mac = String.format("MAC Address : %s", info.macAddress)
         val rssi: Int = info.rssi
         val level = WifiManager.calculateSignalLevel(rssi, 5)
@@ -87,7 +86,12 @@ class AddWorkLogFragment : Fragment() {
 
     private fun addRealm(ssid: String) {
         realm!!.executeTransaction {
-            workData = it.createObject(WorkData::class.java)
+            workData = it.createObject(
+                WorkData::class.java,
+                UUID.randomUUID().toString()
+            ) // PrimaryKeyとなるプロパティの値を入れる
+            workData.year = nowYear()
+            workData.month = nowMonth()
             workData.startTime = nowDate()
             workData.finishTime = null
             workData.ssid = ssid
@@ -106,6 +110,18 @@ class AddWorkLogFragment : Fragment() {
         val data = realm?.where(WorkData::class.java)?.isNull("finishTime")?.findFirst()
         Log.d("readRealm", data.toString())
         return data
+    }
+
+    private fun nowYear(): Int {
+        val date = Date()
+        val formatDate = SimpleDateFormat("yyyy", Locale.JAPANESE)
+        return Integer.parseInt(formatDate.format(date))
+    }
+
+    private fun nowMonth(): Int {
+        val date = Date()
+        val formatDate = SimpleDateFormat("MM", Locale.JAPANESE)
+        return Integer.parseInt(formatDate.format(date))
     }
 
     private fun nowDate(): Date {
