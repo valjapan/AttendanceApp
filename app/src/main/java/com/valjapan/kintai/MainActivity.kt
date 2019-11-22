@@ -3,6 +3,7 @@ package com.valjapan.kintai
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentTransaction
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         realm = Realm.getDefaultInstance()
 
+        setSupportActionBar(my_toolbar)
+
         checkPermission()
 
         if (savedInstanceState == null) {
@@ -38,16 +41,19 @@ class MainActivity : AppCompatActivity() {
                 R.id.addWorkLog -> {
                     transaction.replace(R.id.fragment_container, addWorkLogFragment)
                         .disallowAddToBackStack().commit()
+                    my_toolbar.visibility = View.VISIBLE
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.checkWork -> {
                     transaction.replace(R.id.fragment_container, checkWorkFragment)
                         .disallowAddToBackStack().commit()
+                    my_toolbar.visibility = View.GONE
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.setting -> {
                     transaction.replace(R.id.fragment_container, settingFragment)
                         .disallowAddToBackStack().commit()
+                    my_toolbar.visibility = View.VISIBLE
                     return@setOnNavigationItemSelectedListener true
                 }
             }
