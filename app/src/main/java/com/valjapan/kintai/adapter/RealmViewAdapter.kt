@@ -1,5 +1,6 @@
 package com.valjapan.kintai.adapter
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -14,6 +15,7 @@ import com.valjapan.kintai.R
 import com.valjapan.kintai.WorkDataDetailActivity
 import io.realm.OrderedRealmCollection
 import io.realm.RealmRecyclerViewAdapter
+import kotlinx.android.synthetic.main.detail_dialog.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -47,14 +49,42 @@ class RealmViewAdapter(
         }
         holder.ssidText.text = works?.ssid
 
+        var alertDialog: AlertDialog
         holder.cardView.setOnClickListener {
-
             val context: Context = context
-            val intent = Intent(context, WorkDataDetailActivity::class.java)
-            intent.putExtra("id", works?.id)
 
-            Log.d("Log", works?.startTime.toString())
-            context.startActivity(intent)
+            val view: View = LayoutInflater.from(context).inflate(R.layout.detail_dialog, null)
+
+            val dayTextView = view.findViewById<TextView>(R.id.dayDetailTextView)
+            val startDetailTimeTextView = view.findViewById<TextView>(R.id.startDetailTimeTextView)
+            val finishDetailTextView = view.findViewById<TextView>(R.id.finishDetailTimeTextView)
+            val ssidDetailTextView = view.findViewById<TextView>(R.id.ssidDetailTimeTextView)
+
+            alertDialog = AlertDialog.Builder(context).setView(view).create()
+
+            val date = SimpleDateFormat("yyyy/MM/dd", Locale.JAPANESE)
+            dayTextView.text = date.format(startTime)
+            startDetailTimeTextView.text = hour.format(startTime)
+            if (finishTime == null) {
+                finishDetailTextView.text = "出勤中！"
+            } else {
+                finishDetailTextView.text = hour.format(finishTime)
+            }
+            ssidDetailTextView.text = works?.ssid
+            alertDialog.show()
+
+            view.doneButton.setOnClickListener {
+                alertDialog.dismiss()
+            }
+
+            view.reWriteButton.setOnClickListener {
+                val intent = Intent(context, WorkDataDetailActivity::class.java)
+                intent.putExtra("id", works?.id)
+
+                Log.d("Log", works?.startTime.toString())
+                context.startActivity(intent)
+
+            }
 
         }
     }

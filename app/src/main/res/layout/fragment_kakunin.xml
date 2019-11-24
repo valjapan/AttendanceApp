@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:orientation="horizontal">
 
@@ -19,6 +19,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#00FFFFFF"
+            android:foreground="@drawable/ripple_effect"
             android:src="@drawable/ic_navigate_before_white_64dp" />
 
         <TextView
@@ -37,6 +38,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#00FFFFFF"
+            android:foreground="@drawable/ripple_effect"
             android:src="@drawable/ic_navigate_next_white_64dp" />
 
     </LinearLayout>
