@@ -25,9 +25,11 @@ class WorkDataDetailActivity : AppCompatActivity() {
 
         val startTime = data?.startTime
         val finishTime = data?.finishTime
+        val day = SimpleDateFormat("yyyy年MM月")
         val date = SimpleDateFormat("dd", Locale.JAPANESE)
         val hour = SimpleDateFormat("HH:mm", Locale.JAPANESE)
 
+        dateTextView.text = day.format(startTime)
         dayTextView.text = date.format(startTime)
         startTimeTextView.text = hour.format(startTime)
         if (finishTime == null) {

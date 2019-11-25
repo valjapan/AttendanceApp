@@ -37,7 +37,7 @@ class AddWorkLogFragment : Fragment() {
         workData = WorkData()
 
         if (readRealm() != null) {
-            view.addWorkDataImage.setImageResource(R.drawable.shape_round_orange)
+            view.addWorkDataImage.setImageResource(R.drawable.shape_round_blue)
             view.kakunin.text = "TAIKIN"
         } else {
             view.addWorkDataImage.setImageResource(R.drawable.shape_round)
@@ -51,7 +51,7 @@ class AddWorkLogFragment : Fragment() {
                 view.kakunin.text = "SHUKKIN"
                 reWriteRealm(data)
             } else {
-                view.addWorkDataImage.setImageResource(R.drawable.shape_round_orange)
+                view.addWorkDataImage.setImageResource(R.drawable.shape_round_blue)
                 view.kakunin.text = "TAIKIN"
                 addRealm(getWiFi())
             }

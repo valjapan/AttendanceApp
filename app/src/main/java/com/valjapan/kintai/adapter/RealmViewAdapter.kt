@@ -106,8 +106,5 @@ class RealmViewAdapter(
         var cardView: CardView = view.findViewById(R.id.cardView)
     }
 
-    interface OnItemClickListener {
-        fun onClickItem(key: String, item: WorkData)
-    }
 }
 
