@@ -1,4 +1,4 @@
-package com.valjapan.kintai
+package com.valjapan.kintai.activity
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentTransaction
+import com.valjapan.kintai.R
 import com.valjapan.kintai.fragment.AddWorkLogFragment
 import com.valjapan.kintai.fragment.CheckWorkFragment
 import com.valjapan.kintai.fragment.SettingFragment

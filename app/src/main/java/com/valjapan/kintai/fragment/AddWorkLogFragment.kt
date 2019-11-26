@@ -16,7 +16,6 @@ import kotlinx.android.synthetic.main.fragment_shukkin.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class AddWorkLogFragment : Fragment() {
     private var realm: Realm? = null
     private lateinit var workData: WorkData

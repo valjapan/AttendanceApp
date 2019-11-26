@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".WorkDataDetailActivity">
+    tools:context=".activity.WorkDataDetailActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -124,7 +124,7 @@
                 android:transitionName="ssid" />
 
             <Button
-                android:id="@+id/reAddButton"
+                android:id="@+id/reWriteButton"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="32dp"

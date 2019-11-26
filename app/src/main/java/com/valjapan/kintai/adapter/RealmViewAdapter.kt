@@ -12,23 +12,19 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.valjapan.kintai.R
-import com.valjapan.kintai.WorkDataDetailActivity
+import com.valjapan.kintai.activity.WorkDataDetailActivity
 import io.realm.OrderedRealmCollection
 import io.realm.RealmRecyclerViewAdapter
 import kotlinx.android.synthetic.main.detail_dialog.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class RealmViewAdapter(
     private val context: Context,
     private var objects: OrderedRealmCollection<WorkData>?,
-    private val autoUpdate: Boolean
+    autoUpdate: Boolean
 ) :
     RealmRecyclerViewAdapter<WorkData, RealmViewAdapter.ViewHolder>(objects, autoUpdate) {
-
-    var listener: AdapterView.OnItemClickListener? = null
-    private var workDataActivity: WorkDataDetailActivity = WorkDataDetailActivity()
 
     override fun getItemCount(): Int = objects?.size ?: 0
 
@@ -83,9 +79,8 @@ class RealmViewAdapter(
 
                 Log.d("Log", works?.startTime.toString())
                 context.startActivity(intent)
-
+                alertDialog.dismiss()
             }
-
         }
     }
 
