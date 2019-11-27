@@ -5,7 +5,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import com.valjapan.kintai.R
 import com.valjapan.kintai.adapter.WorkData
-import com.valjapan.kintai.fragment.FinishActivityListener
 import com.valjapan.kintai.fragment.TimePickerFragment
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_work_data_detail.*
@@ -17,7 +16,6 @@ class WorkDataDetailActivity : FragmentActivity(), TimePickerFragment.OnTimeSele
     private var realm: Realm? = null
     private var startDate: Date? = null
     private var finishDate: Date? = null
-    private var listener: FinishActivityListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +58,6 @@ class WorkDataDetailActivity : FragmentActivity(), TimePickerFragment.OnTimeSele
         }
 
         reWriteButton.setOnClickListener {
-            listener?.updateRecyclerView()
             realm?.executeTransaction {
                 data?.startTime = startDate
                 data?.finishTime = finishDate
@@ -86,10 +83,6 @@ class WorkDataDetailActivity : FragmentActivity(), TimePickerFragment.OnTimeSele
     override fun onDestroy() {
         super.onDestroy()
         realm?.close()
-    }
-
-    fun inject(listener: FinishActivityListener) {
-        this.listener = listener
     }
 
     companion object {

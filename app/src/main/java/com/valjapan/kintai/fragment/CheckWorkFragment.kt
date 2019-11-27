@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.valjapan.kintai.R
-import com.valjapan.kintai.activity.WorkDataDetailActivity
 import com.valjapan.kintai.adapter.RealmViewAdapter
 import com.valjapan.kintai.adapter.WorkData
 import io.realm.Realm
@@ -19,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_kakunin.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CheckWorkFragment : Fragment(), FinishActivityListener {
+class CheckWorkFragment : Fragment() {
     private var realm: Realm? = null
     private lateinit var recyclerView: RecyclerView
     private var date = Date()
@@ -28,7 +27,6 @@ class CheckWorkFragment : Fragment(), FinishActivityListener {
     private var year: Int = 0
     private var month: Int = 0
     private var realmResults: RealmResults<WorkData>? = null
-    private var workDataDetailActivity = WorkDataDetailActivity()
     private lateinit var v: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +42,6 @@ class CheckWorkFragment : Fragment(), FinishActivityListener {
     ): View? {
         v = inflater.inflate(R.layout.fragment_kakunin, container, false)
         realm = Realm.getDefaultInstance()
-        workDataDetailActivity.inject(this)
         v.yearMonthTextView.text = "$year 年 $month 月"
         recyclerView = v.findViewById(R.id.check_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(v.context)
@@ -97,21 +94,11 @@ class CheckWorkFragment : Fragment(), FinishActivityListener {
         recyclerView.layoutAnimation =
             AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down)
         recyclerView.adapter =
-            RealmViewAdapter(view.context, realmResults, false)
+            RealmViewAdapter(view.context, realmResults, true)
     }
 
     private fun setText(view: View) {
         Log.d("setText", "$year 年 $month 月")
         view.yearMonthTextView.text = "$year 年 $month 月"
     }
-
-    override fun updateRecyclerView() {
-        searchRealm(v)
-        recyclerView.invalidate()
-        Log.d("Fragment", "UpDate")
-    }
-}
-
-interface FinishActivityListener {
-    fun updateRecyclerView()
 }
