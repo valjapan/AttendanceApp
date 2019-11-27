@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.fragment_kakunin.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class CheckWorkFragment : Fragment() {
     private var realm: Realm? = null
     private lateinit var recyclerView: RecyclerView
@@ -28,7 +27,7 @@ class CheckWorkFragment : Fragment() {
     private var year: Int = 0
     private var month: Int = 0
     private var realmResults: RealmResults<WorkData>? = null
-
+    private lateinit var v: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,15 +40,15 @@ class CheckWorkFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_kakunin, container, false)
+        v = inflater.inflate(R.layout.fragment_kakunin, container, false)
         realm = Realm.getDefaultInstance()
-        view.yearMonthTextView.text = "$year 年 $month 月"
-        recyclerView = view.findViewById(R.id.check_recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(view.context)
-        searchRealm(view)
+        v.yearMonthTextView.text = "$year 年 $month 月"
+        recyclerView = v.findViewById(R.id.check_recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(v.context)
+        searchRealm(v)
         Log.d("Debug", realmResults.toString())
 
-        view.beforeMonth.setOnClickListener {
+        v.beforeMonth.setOnClickListener {
             month--
             when (month) {
                 0 -> {
@@ -61,11 +60,11 @@ class CheckWorkFragment : Fragment() {
                     month = 1
                 }
             }
-            setText(view)
-            searchRealm(view)
+            setText(v)
+            searchRealm(v)
         }
 
-        view.nextMonth.setOnClickListener {
+        v.nextMonth.setOnClickListener {
             month++
             when (month) {
                 0 -> {
@@ -77,14 +76,14 @@ class CheckWorkFragment : Fragment() {
                     month = 1
                 }
             }
-            setText(view)
-            searchRealm(view)
+            setText(v)
+            searchRealm(v)
         }
 
         // Inflate the layout for this fragment
-        Log.d("AddWorkLogFragment", "AddWorkFragmentをCreateViewしました")
+        Log.d("AddWorkLogFragment", "CheckWorkFragmentをCreateViewしました")
 
-        return view
+        return v
     }
 
     private fun searchRealm(view: View) {
@@ -95,17 +94,11 @@ class CheckWorkFragment : Fragment() {
         recyclerView.layoutAnimation =
             AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down)
         recyclerView.adapter =
-            RealmViewAdapter(view.context, realmResults, false)
+            RealmViewAdapter(view.context, realmResults, true)
     }
 
     private fun setText(view: View) {
         Log.d("setText", "$year 年 $month 月")
         view.yearMonthTextView.text = "$year 年 $month 月"
-    }
-
-    fun initData() {
-        val list = mutableListOf<WorkData>()
-        val realmResults = realm?.where(WorkData::class.java)?.findAll()
-
     }
 }

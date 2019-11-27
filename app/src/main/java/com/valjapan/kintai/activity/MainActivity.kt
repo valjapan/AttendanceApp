@@ -1,4 +1,4 @@
-package com.valjapan.kintai
+package com.valjapan.kintai.activity
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -7,12 +7,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentTransaction
+import com.valjapan.kintai.R
 import com.valjapan.kintai.fragment.AddWorkLogFragment
 import com.valjapan.kintai.fragment.CheckWorkFragment
 import com.valjapan.kintai.fragment.SettingFragment
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
-
 
 class MainActivity : AppCompatActivity() {
     private val addWorkLogFragment: AddWorkLogFragment = AddWorkLogFragment()
@@ -23,18 +23,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         realm = Realm.getDefaultInstance()
-
         setSupportActionBar(my_toolbar)
-
         checkPermission()
-
         if (savedInstanceState == null) {
             val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
             transaction.add(R.id.fragment_container, addWorkLogFragment).commit()
         }
-
         bottom_navigation.setOnNavigationItemSelectedListener {
             val transaction = supportFragmentManager.beginTransaction()
             when (it.itemId) {
