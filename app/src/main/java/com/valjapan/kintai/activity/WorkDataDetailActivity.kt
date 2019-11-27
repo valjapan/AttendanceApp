@@ -14,19 +14,15 @@ import java.util.*
 
 
 class WorkDataDetailActivity : FragmentActivity(), TimePickerFragment.OnTimeSelectedListener {
-
     private var realm: Realm? = null
     private var startDate: Date? = null
     private var finishDate: Date? = null
-
     private var listener: FinishActivityListener? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_work_data_detail)
         realm = Realm.getDefaultInstance()
-
 
         val dataId = intent.getStringExtra("id") ?: ""
 
@@ -49,7 +45,7 @@ class WorkDataDetailActivity : FragmentActivity(), TimePickerFragment.OnTimeSele
             finishTimeTextView.text = hour.format(finishDate)
             finishTimeTextView.setOnClickListener {
                 val cal: Calendar = Calendar.getInstance()
-                cal.time = startDate
+                cal.time = finishDate
                 val timeFragment: DialogFragment = TimePickerFragment(cal, finishDate, finishPhase)
                 timeFragment.show(supportFragmentManager, "timePicker")
             }
@@ -64,11 +60,11 @@ class WorkDataDetailActivity : FragmentActivity(), TimePickerFragment.OnTimeSele
         }
 
         reWriteButton.setOnClickListener {
+            listener?.updateRecyclerView()
             realm?.executeTransaction {
                 data?.startTime = startDate
                 data?.finishTime = finishDate
             }
-            listener?.updateRecyclerView()
             finish()
         }
     }
@@ -86,7 +82,6 @@ class WorkDataDetailActivity : FragmentActivity(), TimePickerFragment.OnTimeSele
             }
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

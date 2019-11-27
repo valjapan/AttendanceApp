@@ -107,6 +107,8 @@ class CheckWorkFragment : Fragment(), FinishActivityListener {
 
     override fun updateRecyclerView() {
         searchRealm(v)
+        recyclerView.invalidate()
+        Log.d("Fragment", "UpDate")
     }
 }
 
