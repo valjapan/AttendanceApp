@@ -1,6 +1,10 @@
 package com.valjapan.kintai.fragment
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context.ALARM_SERVICE
 import android.content.Context.WIFI_SERVICE
+import android.content.Intent
 import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.util.Log
@@ -8,8 +12,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.valjapan.kintai.R
+import com.valjapan.kintai.activity.MainActivity
+import com.valjapan.kintai.adapter.TaskAlarmReceiver
 import com.valjapan.kintai.adapter.WorkData
 import io.realm.Realm
 import kotlinx.android.synthetic.main.fragment_shukkin.view.*
@@ -35,6 +42,12 @@ class AddWorkLogFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_shukkin, container, false)
         workData = WorkData()
 
+        val identifier = if (realm?.where(WorkData::class.java)?.findAll()?.size != null) {
+            realm!!.where(WorkData::class.java)!!.findAll()!!.size
+        } else {
+            0
+        }
+
         if (readRealm() != null) {
             view.addWorkDataImage.setImageResource(R.drawable.shape_round_blue)
             view.kakunin.text = "TAIKIN"
@@ -53,6 +66,35 @@ class AddWorkLogFragment : Fragment() {
                 view.addWorkDataImage.setImageResource(R.drawable.shape_round_blue)
                 view.kakunin.text = "TAIKIN"
                 addRealm(getWiFi())
+
+                //TAIKIN画面になった時(
+                val resultIntent = Intent(context, TaskAlarmReceiver::class.java)
+                resultIntent.putExtra(MainActivity.EXTRA_TASK, identifier)
+                val resultPendeingIntent = PendingIntent.getBroadcast(
+                    context,
+                    identifier,
+                    resultIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT
+                )
+
+                val calender = Calendar.getInstance()
+                val year = calender.get(Calendar.YEAR)
+                val month = calender.get(Calendar.MONTH)
+                val day = calender.get(Calendar.DATE) + 1 //次の日
+                val timeCalender = GregorianCalendar(year, month, day, 0, 0)
+
+                val alarmManager: AlarmManager =
+                    context?.getSystemService(ALARM_SERVICE) as AlarmManager
+                alarmManager.set(
+                    AlarmManager.RTC_WAKEUP,
+                    timeCalender.timeInMillis,
+                    resultPendeingIntent
+                )
+                Toast.makeText(
+                    context,
+                    "alarm start", Toast.LENGTH_SHORT
+                ).show()
+
             }
         }
         return view

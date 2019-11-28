@@ -80,4 +80,8 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         realm.close()
     }
+
+    companion object {
+        const val EXTRA_TASK: String = "com.valjapan.kintai.TASK"
+    }
 }
