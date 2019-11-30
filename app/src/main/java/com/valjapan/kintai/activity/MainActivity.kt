@@ -10,14 +10,12 @@ import androidx.fragment.app.FragmentTransaction
 import com.valjapan.kintai.R
 import com.valjapan.kintai.fragment.AddWorkLogFragment
 import com.valjapan.kintai.fragment.CheckWorkFragment
-import com.valjapan.kintai.fragment.SettingFragment
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private val addWorkLogFragment: AddWorkLogFragment = AddWorkLogFragment()
     private val checkWorkFragment: CheckWorkFragment = CheckWorkFragment()
-    private val settingFragment: SettingFragment = SettingFragment()
     private lateinit var realm: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,12 +41,6 @@ class MainActivity : AppCompatActivity() {
                     transaction.replace(R.id.fragment_container, checkWorkFragment)
                         .disallowAddToBackStack().commit()
                     my_toolbar.visibility = View.GONE
-                    return@setOnNavigationItemSelectedListener true
-                }
-                R.id.setting -> {
-                    transaction.replace(R.id.fragment_container, settingFragment)
-                        .disallowAddToBackStack().commit()
-                    my_toolbar.visibility = View.VISIBLE
                     return@setOnNavigationItemSelectedListener true
                 }
             }
