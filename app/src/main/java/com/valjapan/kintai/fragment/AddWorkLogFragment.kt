@@ -103,24 +103,6 @@ class AddWorkLogFragment : Fragment() {
         val manager = context?.getSystemService(WIFI_SERVICE) as WifiManager?
         val info = manager!!.connectionInfo
         val ssid = String.format("SSID : %s", info.ssid)
-        val ipAdr = info.ipAddress
-        val ip = String.format(
-            "IP Adrress : %02d.%02d.%02d.%02d",
-            ipAdr shr 0 and 0xff,
-            ipAdr shr 8 and 0xff,
-            ipAdr shr 16 and 0xff,
-            ipAdr shr 24 and 0xff
-        )
-        val mac = String.format("MAC Address : %s", info.macAddress)
-        val rssi: Int = info.rssi
-        val level = WifiManager.calculateSignalLevel(rssi, 5)
-        val rssiString: String = String.format("RSSI : %d / Level : %d/4", rssi, level)
-
-        Log.d("ssid", ssid)
-        Log.d("mac", mac)
-        Log.d("ip", ip)
-        Log.d("rssi", rssiString)
-
         return ssid
     }
 
