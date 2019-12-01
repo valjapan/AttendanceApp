@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -32,7 +31,6 @@ class RealmViewAdapter(
         val works = objects?.get(position)
         val startTime = works?.startTime
         val finishTime = works?.finishTime
-
         val date = SimpleDateFormat("dd", Locale.JAPANESE)
         val hour = SimpleDateFormat("HH:mm", Locale.JAPANESE)
 
@@ -44,13 +42,10 @@ class RealmViewAdapter(
             holder.finishTimeText.text = hour.format(finishTime)
         }
         holder.ssidText.text = works?.ssid
-
         var alertDialog: AlertDialog
         holder.cardView.setOnClickListener {
             val context: Context = context
-
             val view: View = LayoutInflater.from(context).inflate(R.layout.detail_dialog, null)
-
             val dayTextView = view.findViewById<TextView>(R.id.dayDetailTextView)
             val startDetailTimeTextView = view.findViewById<TextView>(R.id.startDetailTimeTextView)
             val finishDetailTextView = view.findViewById<TextView>(R.id.finishDetailTimeTextView)
@@ -72,7 +67,6 @@ class RealmViewAdapter(
             view.doneButton.setOnClickListener {
                 alertDialog.dismiss()
             }
-
             view.reWriteButton.setOnClickListener {
                 val intent = Intent(context, WorkDataDetailActivity::class.java)
                 intent.putExtra("id", works?.id)
@@ -89,7 +83,6 @@ class RealmViewAdapter(
         // Create a new view.
         val v = LayoutInflater.from(context)
             .inflate(R.layout.check_work_view, viewGroup, false)
-
         return ViewHolder(v)
     }
 
