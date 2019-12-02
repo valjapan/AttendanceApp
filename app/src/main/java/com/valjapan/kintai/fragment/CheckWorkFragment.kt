@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.valjapan.kintai.R
@@ -17,6 +18,7 @@ import io.realm.RealmResults
 import kotlinx.android.synthetic.main.fragment_kakunin.view.*
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class CheckWorkFragment : Fragment() {
     private var realm: Realm? = null
@@ -47,6 +49,7 @@ class CheckWorkFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(v.context)
         searchRealm(v)
         Log.d("Debug", realmResults.toString())
+
 
         v.beforeMonth.setOnClickListener {
             month--

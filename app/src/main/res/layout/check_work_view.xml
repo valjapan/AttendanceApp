@@ -2,11 +2,11 @@
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
-    android:id="@+id/cardView"
     android:background="@color/white"
     app:cardUseCompatPadding="true">
 
@@ -19,7 +19,8 @@
             android:id="@+id/dayText"
             android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:gravity="center"
             android:text="31"
             android:textSize="48sp"
@@ -71,10 +72,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:autoSizeMaxTextSize="20sp"
+                android:autoSizeMinTextSize="8sp"
+                android:autoSizeTextType="uniform"
                 android:gravity="center"
+                android:singleLine="true"
                 android:text="Life is Tech! TMD9F"
-                android:textSize="20sp"
-                android:transitionName="ssid" />
+                android:textSize="16sp"
+                android:transitionName="ssid"/>
 
         </LinearLayout>
     </LinearLayout>

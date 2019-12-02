@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -69,10 +70,14 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:autoSizeMaxTextSize="24sp"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:text="WiFi"
                 android:textSize="24sp"
-                android:transitionName="ssid" />
+                android:transitionName="ssid"
+                app:autoSizeMinTextSize="8sp" />
 
         </LinearLayout>
 
@@ -81,27 +86,25 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:orientation="horizontal">
+            <Button
+                android:id="@+id/reWriteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:foreground="@drawable/ripple_white"
+                android:text="編集"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/doneButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
+                android:background="#00FFFFFF"
+                android:foreground="@drawable/ripple_white"
                 android:text="OK"
                 android:textColor="@color/colorAccent"
                 android:textSize="16sp" />
-
-            <Button
-                android:id="@+id/reWriteButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:text="編集"
-                android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
         </LinearLayout>
-
-
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

@@ -10,13 +10,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.valjapan.kintai.R
 import com.valjapan.kintai.activity.WorkDataDetailActivity
 import io.realm.OrderedRealmCollection
+import io.realm.Realm
 import io.realm.RealmRecyclerViewAdapter
+import kotlinx.android.synthetic.main.delete_dialog.view.*
 import kotlinx.android.synthetic.main.detail_dialog.view.*
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class RealmViewAdapter(
     private val context: Context,
@@ -52,7 +56,6 @@ class RealmViewAdapter(
             val ssidDetailTextView = view.findViewById<TextView>(R.id.ssidDetailTimeTextView)
 
             alertDialog = AlertDialog.Builder(context).setView(view).create()
-
             val date = SimpleDateFormat("yyyy/MM/dd", Locale.JAPANESE)
             dayTextView.text = date.format(startTime)
             startDetailTimeTextView.text = hour.format(startTime)
@@ -76,6 +79,37 @@ class RealmViewAdapter(
                 alertDialog.dismiss()
             }
         }
+        holder.cardView.setOnLongClickListener {
+            val context: Context = context
+            val view: View = LayoutInflater.from(context).inflate(R.layout.delete_dialog, null)
+            val deleteDayTextView = view.findViewById<TextView>(R.id.deleteDayDetailTextView)
+            val deleteStartDetailTimeTextView =
+                view.findViewById<TextView>(R.id.deleteStartTimeText)
+            val deleteFinishDetailTextView = view.findViewById<TextView>(R.id.deleteFinishTimeText)
+            val dialog = BottomSheetDialog(context)
+            dialog.setContentView(view)
+
+            val date = SimpleDateFormat("yyyy年MM月dd日", Locale.JAPANESE)
+            deleteDayTextView.text = date.format(startTime)
+            deleteStartDetailTimeTextView.text = hour.format(startTime)
+            if (finishTime == null) {
+                deleteFinishDetailTextView.text = "出勤中！"
+            } else {
+                deleteFinishDetailTextView.text = hour.format(finishTime)
+            }
+            dialog.show()
+            view.deleteButton.setOnClickListener {
+                val realm: Realm = Realm.getDefaultInstance()
+                realm.executeTransaction {
+                    works?.deleteFromRealm()
+                }
+                dialog.dismiss()
+            }
+            view.cancelButton.setOnClickListener {
+                dialog.dismiss()
+            }
+            return@setOnLongClickListener false
+        }
     }
 
     // Create new views (invoked by the layout manager)
@@ -93,6 +127,5 @@ class RealmViewAdapter(
         var ssidText: TextView = view.findViewById(R.id.ssidText)
         var cardView: CardView = view.findViewById(R.id.cardView)
     }
-
 }
 

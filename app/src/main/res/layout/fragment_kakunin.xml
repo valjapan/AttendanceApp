@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#00FFFFFF"
-            android:foreground="@drawable/ripple_effect"
+            android:foreground="@drawable/ripple_white_corner"
             android:src="@drawable/ic_navigate_before_white_64dp" />
 
         <TextView
@@ -38,7 +38,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#00FFFFFF"
-            android:foreground="@drawable/ripple_effect"
+            android:foreground="@drawable/ripple_white"
             android:src="@drawable/ic_navigate_next_white_64dp" />
 
     </LinearLayout>

@@ -118,7 +118,11 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="32dp"
                 android:layout_weight="1"
+                android:autoSizeMaxTextSize="32sp"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeTextType="uniform"
                 android:gravity="center"
+                android:singleLine="true"
                 android:text="WiFi"
                 android:textSize="32sp"
                 android:transitionName="ssid" />
