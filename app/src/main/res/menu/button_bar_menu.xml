@@ -9,5 +9,4 @@
         android:id="@+id/checkWork"
         android:icon="@drawable/ic_view_list_white_64dp"
         android:title="確認" />
-
 </menu>

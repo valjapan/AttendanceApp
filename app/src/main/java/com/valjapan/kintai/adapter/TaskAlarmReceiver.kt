@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.valjapan.kintai.R
 import com.valjapan.kintai.activity.MainActivity
@@ -17,8 +16,6 @@ import java.util.*
 
 class TaskAlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        Log.d("AlarmBroadcastReceiver", "onReceive() pid=" + android.os.Process.myPid())
-
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -47,7 +44,7 @@ class TaskAlarmReceiver : BroadcastReceiver() {
         builder.setAutoCancel(true)
 
         // EXTRA_TASKからTaskのidを取得して、idからTaskのインスタンスを取得する
-        val taskId = intent.getIntExtra(MainActivity.EXTRA_TASK, -1)
+        intent.getIntExtra(MainActivity.EXTRA_TASK, -1)
         val realm = Realm.getDefaultInstance()
         val task = realm?.where(WorkData::class.java)?.isNull("finishTime")?.findFirst()
 
@@ -75,7 +72,8 @@ class TaskAlarmReceiver : BroadcastReceiver() {
                     it.id
                 )
             )
-            val pendingIntent = stackBuilder.getPendingIntent(identifier, PendingIntent.FLAG_UPDATE_CURRENT)
+            val pendingIntent =
+                stackBuilder.getPendingIntent(identifier, PendingIntent.FLAG_UPDATE_CURRENT)
             builder.setContentIntent(pendingIntent)
             // 通知を表示する
             notificationManager.notify(

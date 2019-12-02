@@ -1,13 +1,11 @@
 package com.valjapan.kintai.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.valjapan.kintai.R
@@ -18,7 +16,6 @@ import io.realm.RealmResults
 import kotlinx.android.synthetic.main.fragment_kakunin.view.*
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 class CheckWorkFragment : Fragment() {
     private var realm: Realm? = null
@@ -33,7 +30,6 @@ class CheckWorkFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("AddWorkLogFragment", "Fragmentの初回起動")
         year = Integer.parseInt(formatYear.format(date))
         month = Integer.parseInt(formatMonth.format(date))
     }
@@ -48,9 +44,6 @@ class CheckWorkFragment : Fragment() {
         recyclerView = v.findViewById(R.id.check_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(v.context)
         searchRealm(v)
-        Log.d("Debug", realmResults.toString())
-
-
         v.beforeMonth.setOnClickListener {
             month--
             when (month) {
@@ -82,10 +75,6 @@ class CheckWorkFragment : Fragment() {
             setText(v)
             searchRealm(v)
         }
-
-        // Inflate the layout for this fragment
-        Log.d("AddWorkLogFragment", "CheckWorkFragmentをCreateViewしました")
-
         return v
     }
 
@@ -93,7 +82,7 @@ class CheckWorkFragment : Fragment() {
         realmResults = realm?.where(WorkData::class.java)
             ?.equalTo("year", year)
             ?.equalTo("month", month)
-            ?.findAll()
+            ?.findAll()?.sort("startTime")
         recyclerView.layoutAnimation =
             AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down)
         recyclerView.adapter =
@@ -101,7 +90,6 @@ class CheckWorkFragment : Fragment() {
     }
 
     private fun setText(view: View) {
-        Log.d("setText", "$year 年 $month 月")
         view.yearMonthTextView.text = "$year 年 $month 月"
     }
 }

@@ -7,7 +7,6 @@ import android.content.Context.WIFI_SERVICE
 import android.content.Intent
 import android.net.wifi.WifiManager
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,17 +25,11 @@ class AddWorkLogFragment : Fragment() {
     private var realm: Realm? = null
     private lateinit var workData: WorkData
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d("AddWorkLogFragment", "Fragmentの初回起動")
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        Log.d("AddWorkLogFragment", "ShukkinFragmentをCreateViewしました")
         realm = Realm.getDefaultInstance()
         val view = inflater.inflate(R.layout.fragment_shukkin, container, false)
         workData = WorkData()
@@ -125,13 +118,10 @@ class AddWorkLogFragment : Fragment() {
         realm!!.executeTransaction {
             workData!!.finishTime = nowDate()
         }
-        Log.d("reWriteRealm", workData.toString())
     }
 
     private fun readRealm(): WorkData? {
-        val data = realm?.where(WorkData::class.java)?.isNull("finishTime")?.findFirst()
-        Log.d("readRealm", data.toString())
-        return data
+        return realm?.where(WorkData::class.java)?.isNull("finishTime")?.findFirst()
     }
 
     private fun nowYear(): Int {
