@@ -102,6 +102,7 @@ class RealmViewAdapter(
                 val realm: Realm = Realm.getDefaultInstance()
                 realm.executeTransaction {
                     works?.deleteFromRealm()
+                    it.where(WorkData::class.java)?.findAll()?.sort("startTime")
                 }
                 dialog.dismiss()
             }
